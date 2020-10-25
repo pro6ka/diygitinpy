@@ -4,7 +4,6 @@ import argparse
 def main():
     args = parse_args()
     args.func(args)
-    print('Hello, world..')
 
 
 def parse_args():
