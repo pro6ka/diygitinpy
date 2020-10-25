@@ -7,7 +7,7 @@ def main():
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description = '123')
+    parser = argparse.ArgumentParser(description = 'parse ugit artuments to get command')
 
     commands = parser.add_subparsers(dest = 'command')
     commands.required = True
