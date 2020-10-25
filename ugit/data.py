@@ -10,7 +10,7 @@ def init():
 
 
 def hash_object(data):
-    oid = hashlib.sha1(data).hashdigest()
+    oid = hashlib.sha1(data).hexdigest()
     with open(f'{GIT_DIR}/objects/{oid}', 'wb') as out:
         out.write(data)
 
