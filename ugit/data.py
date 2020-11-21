@@ -17,7 +17,6 @@ def update_ref(ref, oid):
 def get_ref(ref):
     if os.path.isfile(f'{GIT_DIR}/{ref}'):
         with open(f'{GIT_DIR}/{ref}') as f:
-            # print(f'from get_HEAD: {f.read().strip()}')
             return f.read().strip()
 
 
