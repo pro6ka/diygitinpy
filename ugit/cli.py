@@ -48,7 +48,7 @@ def parse_args():
     checkout_parser.set_defaults(func = checkout)
     checkout_parser.add_argument('oid')
 
-    tag_parser = command.add_parser('tag')
+    tag_parser = commands.add_parser('tag')
     tag_parser.set_defaults(func = tag)
     tag_parser.add_argument('name')
     tag_parser.add_argument('oid', nargs='?')
