@@ -121,8 +121,8 @@ def k(args):
     oids = set()
     for refname, ref in data.iter_refs():
         dot += f'"{refname}" [shape=note]\n'
-        dot += f'"{refname}" -> "{ref}"\n'
-        oids.add(ref)
+        dot += f'"{refname}" -> "{ref.value}"\n'
+        oids.add(ref.value)
 
     for oid in base.iter_commits_and_parents(oids):
         commit = base.get_commit(oid)
@@ -131,7 +131,6 @@ def k(args):
             dot += f'"{oid}" -> "{commit.parent}"\n'
 
     dot += '}'
-    print(dot)
     with subprocess.Popen(
             ['dot', '-Tpng', '/proc/self/fd/0'],
             stdin = subprocess.PIPE) as proc:
