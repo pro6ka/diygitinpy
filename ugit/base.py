@@ -105,7 +105,7 @@ def commit(message):
 def checkout(oid):
     commit = get_commit(oid)
     read_tree(commit.tree)
-    data.update_ref('HEAD' data.RefValue(symbolyc = False, value = oid))
+    data.update_ref('HEAD', data.RefValue(symbolyc = False, value = oid))
 
 
 def create_tag(name, oid):
