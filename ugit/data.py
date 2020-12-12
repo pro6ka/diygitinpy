@@ -10,16 +10,21 @@ def init():
     os.makedirs(f'{GIT_DIR}/objects')
 
 
-RefValue = namedtuple('RefValue', ['symbolyc', 'value'])
+RefValue = namedtuple('RefValue', ['symbolic', 'value'])
 
 
 def update_ref(ref, value, deref = True):
-    assert not value.symbolyc
     ref = _get_ref_internal(ref, deref)[0]
+
+    assert value.value
+    if value.symbolic:
+        value = f'ref: {value.value}'
+    else:
+        value = value.value
     ref_path = f'{GIT_DIR}/{ref}'
     os.makedirs(os.path.dirname(ref_path), exist_ok = True)
     with open(ref_path, 'w') as f:
-        f.write(value.value)
+        f.write(value)
 
 
 def get_ref(ref, deref = True):
@@ -40,7 +45,7 @@ def _get_ref_internal(ref, deref):
         if deref:
             return _get_ref_internal(value, deref = True)
 
-    return ref, RefValue(symbolyc = symbolic, value = value)
+    return ref, RefValue(symbolic = symbolic, value = value)
 
 
 def iter_refs(deref = True):

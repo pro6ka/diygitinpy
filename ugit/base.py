@@ -97,7 +97,7 @@ def commit(message):
 
     oid = data.hash_object(commit.encode(), 'commit')
 
-    data.update_ref('HEAD', data.RefValue(symbolyc = False, value = oid))
+    data.update_ref('HEAD', data.RefValue(symbolic = False, value = oid))
 
     return oid
 
@@ -105,15 +105,15 @@ def commit(message):
 def checkout(oid):
     commit = get_commit(oid)
     read_tree(commit.tree)
-    data.update_ref('HEAD', data.RefValue(symbolyc = False, value = oid))
+    data.update_ref('HEAD', data.RefValue(symbolic = False, value = oid))
 
 
 def create_tag(name, oid):
-    data.update_ref(f'refs/tags/{name}', data.RefValue(symbolyc = False, value = oid))
+    data.update_ref(f'refs/tags/{name}', data.RefValue(symbolic = False, value = oid))
 
 
 def create_branch(name, oid):
-    data.update_ref(f'refs/heads/{name}', data.RefValue(symbolyc = False, value = oid))
+    data.update_ref(f'refs/heads/{name}', data.RefValue(symbolic = False, value = oid))
 
 
 Commit = namedtuple('Commit', ['tree', 'parent', 'message'])
