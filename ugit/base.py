@@ -88,7 +88,7 @@ def read_tree(tree_oid):
 def commit(message):
     commit = f'tree {write_tree()}\n'
 
-    HEAD = data.get_ref('HEAD').value
+    HEAD = data.get_ref('HEAD')[1].value
     if HEAD:
         commit += f'parent {HEAD}\n'
 
@@ -162,8 +162,8 @@ def get_oid(name):
         f'refs/heads/{name}',
     ]
     for ref in refs_to_try:
-        if data.get_ref(ref).value:
-            return data.get_ref(ref).value
+        if data.get_ref(ref)[1].value:
+            return data.get_ref(ref)[1].value
 
     # name is SHA
     is_hex = all(c in string.hexdigits for c in name)

@@ -32,8 +32,12 @@ def _get_ref_internal(ref):
     if os.path.isfile(ref_path):
         with open(ref_path) as f:
             value = f.read().strip()
+    
+    symbolyc = bool (value) and value.startswith('ref:')
+    if symbolyc:
+        value = value.split(':', 1)[1].strip()
 
-    return RefValue(symbolyc = False, value = value)
+    return ref, RefValue(symbolyc = False, value = value)
 
 
 def iter_refs():
