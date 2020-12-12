@@ -15,6 +15,7 @@ RefValue = namedtuple('RefValue', ['symbolyc', 'value'])
 
 def update_ref(ref, value):
     assert not value.symbolyc
+    ref = _get_ref_internal(ref)[0]
     ref_path = f'{GIT_DIR}/{ref}'
     os.makedirs(os.path.dirname(ref_path), exist_ok = True)
     with open(ref_path, 'w') as f:
@@ -22,14 +23,15 @@ def update_ref(ref, value):
 
 
 def get_ref(ref):
+    return _get_ref_internal(ref)
+
+
+def _get_ref_internal(ref):
     ref_path = f'{GIT_DIR}/{ref}'
     value = None
     if os.path.isfile(ref_path):
         with open(ref_path) as f:
             value = f.read().strip()
-
-    if value and value.startwith('ref:'):
-        return get_ref(value.split(':', 1)[1].strip())
 
     return RefValue(symbolyc = False, value = value)
 
