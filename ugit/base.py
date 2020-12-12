@@ -162,7 +162,7 @@ def get_oid(name):
         f'refs/heads/{name}',
     ]
     for ref in refs_to_try:
-        if data.get_ref(ref)[1].value:
+        if data.get_ref(ref, deref = False)[1].value:
             return data.get_ref(ref)[1].value
 
     # name is SHA
